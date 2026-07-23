@@ -1640,11 +1640,18 @@ listeners.push(unsub);
 
 function renderProducts(list){
 
-
 let html="";
 
 
 list.forEach(p=>{
+
+let price = 0;
+
+if(p.options && p.options.length){
+
+price = p.options[0].price;
+
+}
 
 
 html+=`
@@ -1659,7 +1666,7 @@ onclick="openProduct('${p.id}')">
 
 <p>
 
-${p.price ? p.price+" TL":""}
+${price} TL
 
 </p>
 
@@ -1749,10 +1756,15 @@ quantity=1;
 
 
 
-currentPrice=
+if(currentProduct.options && currentProduct.options.length){
 
-Number(currentProduct.price)||0;
+currentPrice = Number(currentProduct.options[0].price);
 
+}else{
+
+currentPrice = 0;
+
+}
 
 
 productDetails.innerHTML=`
@@ -2112,4 +2124,4 @@ show("home");
 
 </body>
 
-</html
+</html>
